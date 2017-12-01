@@ -65,6 +65,7 @@ A string corresponding to the parameters, ready to be used in a url:
 ```
 
 Null values or *deep* empty arrays/objects will be ignored.
+
 *Note: By "deep" I mean which doesn't contain any scalar value, nested or not.*
 
 ### `object` (Object)
