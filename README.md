@@ -37,7 +37,7 @@ parameters.string;
 
 ## Constructor
 
-The constructor take the same parameters as the `define()` method and does the same thing.
+The constructor take the same parameters as the [`define()`](#define--parameters) method and does the same thing.
 
 ## Instance properties
 
@@ -99,11 +99,11 @@ Opposite of `empty`.
 
 ### `toString()` → String
 
-Same thing as getting the `string` property.
+Same thing as getting the [`string`](#string-string) property.
 
 **Parameters:** None
 
-**Return value:**  The value of the `string` property.
+**Return value:**  The value of the [`string`](#string-string) property.
 
 ### `add()` → Parameters
 
@@ -119,9 +119,9 @@ If it is a String, it will be used as the parmeter name, and its value will be i
 
 ### `define()` → Parameters
 
-Same thing as calling `clear()` then `add()`.
+Same thing as calling [`clear()`](#clear--parameters) then [`add()`](#add--parameters).
 
-**Parameters:** Same as `add()`
+**Parameters:** Same as [`add()`](#add--parameters).
 
 **Return value:**  `this`
 
