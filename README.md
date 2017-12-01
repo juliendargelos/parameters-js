@@ -11,7 +11,7 @@ npm install parameters-js
 ## Usage
 
 ```javascript
-var parameters = new Parameters('post', 'date');
+var parameters = new Parameters();
 
 parameters.post = 2;
 parameters.string;
@@ -21,7 +21,6 @@ parameters.date = '10/12/1997';
 parameters.string;
 // => "post=2&date=10%2F12%2F1997"
 
-parameters.add('authors');
 parameters.authors = [
     {name: 'Marie', country: 'England'},
     {name: 'Marc', country: 'France'}
@@ -37,7 +36,7 @@ parameters.string;
 
 ## Constructor
 
-The constructor take the same parameters as the [`define()`](#define--parameters) method and does the same thing.
+The constructor take the same parameters as the [`set()`](#set--parameters) method and does the same thing.
 
 ## Instance properties
 
@@ -72,23 +71,6 @@ Null values or *deep* empty arrays/objects will be ignored.
 
 ---
 
-#### `object` (Object)
-
-An object corresponding to the parameters:
-
-```
-{
-    post: 5,
-    date: '10/12/1997',
-    authors: [
-        {name: 'Marie', country: 'England'},
-        {name: 'Marc', country: 'France'}
-    ]
-}
-```
-
----
-
 #### `clone` (Parameters)
 
 A new clone of the current Parameters object.
@@ -105,6 +87,32 @@ True if no value different from null can be found in the parameters, false in th
 
 Opposite of `empty`.
 
+---
+
+### `inputs` (DocumentFragment)
+
+A set of inputs corresponding the parameters.
+
+**Be careful:** Parameters with a value of type `File` will not be transformed into input type file because this is not impossible. The usual `toString()` method will be called on it.
+
+---
+
+### `form` (HTMLFormElement)
+
+A form corresponding the parameters, containing [`inputs`](#inputs-documentfragement).
+
+---
+
+### `formData` (FormData)
+
+A FormData instance corresponding to the parameters. Here, `File` instance values will be handled.
+
+---
+
+### `json` (String)
+
+A JSON serialized string corresponding to the parameters.
+
 ## Instance methods
 
 #### `toString()` → String
@@ -117,37 +125,13 @@ Same thing as getting the [`string`](#string-string) property.
 
 ---
 
-#### `add()` → Parameters
+#### `unset()` → Parameters
 
-Adds parameters to the object.
-
-**Parameters:**
-- `...parameters` ([String|Object]):
-A list of parameters to add. Each of them can be either a String or an Object.
-If it is an Object, each key will be used as the parameter name, and each value will be used to initialize the corresponding parameter value.
-If it is a String, it will be used as the parmeter name, and its value will be initialized to null.
-
-**Return value:** `this`
-
----
-
-#### `define()` → Parameters
-
-Same thing as calling [`clear()`](#clear--parameters) then [`add()`](#add--parameters).
-
-**Parameters:** Same as [`add()`](#add--parameters).
-
-**Return value:**  `this`
-
----
-
-#### `remove()` → Parameters
-
-Removes parameters from the object.
+Unset parameters from the object.
 
 **Parameters:**
 - `...keys` ([String]):
-A list of parameters keys to remove.
+A list of parameters keys to unset.
 
 **Return value:**  `this`
 

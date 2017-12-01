@@ -1,7 +1,6 @@
 class Parameters {
   constructor(...parameters) {
-    this.keys = [];
-    this.define(...parameters);
+    this.set(...parameters);
   }
 
   static flatten(object, current, flattened) {
@@ -15,7 +14,9 @@ class Parameters {
       object.forEach(value => this.flatten(value, this.key(current, ''), flattened));
     }
     else if(typeof object === 'object') {
-      for(var key in object) this.flatten(object[key], this.key(current, key), flattened);
+      for(var key in object) {
+        if(object.hasOwnProperty(key)) this.flatten(object[key], this.key(current, key), flattened);
+      }
     }
 
     return flattened;
@@ -25,8 +26,12 @@ class Parameters {
     return current ? current + '[' + key + ']' : key;
   }
 
+  get keys() {
+    return Object.getOwnPropertyNames(this);
+  }
+
   get flattened() {
-    return this.constructor.flatten(this.object);
+    return this.constructor.flatten(this);
   }
 
   get string() {
@@ -39,15 +44,72 @@ class Parameters {
     return parameters.join('&');
   }
 
-  get object() {
-    var object = {};
-    this.each((key, value) => { object[key] = value });
+  get inputs() {
+    var inputs = document.createDocumentFragment();
 
-    return object;
+    this.flattened.forEach(parameter => {
+      var input = document.createElement('input');
+      var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
+      input.type = 'hidden';
+      input.name = parameter.key;
+      input.setAttribute('value', value);
+      inputs.value = value;
+
+      inputs.appendChild(input);
+    });
+
+    return inputs;
+  }
+
+  set inputs(v) {
+    if(v instanceof DocumentFragment) v = v.querySelector('input, textarea, select');
+    Array.prototype.forEach.call(v, input => {
+
+    });
+  }
+
+  get formData() {
+    var formData = new FormData();
+    this.flattened.forEach(parameter => formData.append(parameter.key, parameter.value));
+
+    return formData;
+  }
+
+  set formData(v) {
+
+  }
+
+  get form() {
+    var form = document.createElement('form');
+    form.appendChild(this.inputs);
+
+    return form;
+  }
+
+  set form(v) {
+    try {
+      this.inputs = v.querySelector('input, textarea, select');
+    }
+    catch(e) {
+      throw e;
+    }
+  }
+
+  get json() {
+    return JSON.stringify(this);
+  }
+
+  set json(v) {
+    try {
+      this.set(JSON.parse(v));
+    }
+    catch(e) {
+      throw e;
+    }
   }
 
   get clone() {
-    return new this.constructor(this.object);
+    return new this.constructor(this);
   }
 
   get empty() {
@@ -67,35 +129,19 @@ class Parameters {
     return this.string;
   }
 
-  add(...parameters) {
+  set(...parameters) {
     parameters.forEach(parameters => {
       if(typeof parameters === 'string') parameters = {[parameters]: null};
       if(typeof parameters === 'object' && parameters !== null) {
-        for(var key in parameters) {
-          if(!this.have(key)) {
-            this.keys.push(key);
-            this[key] = parameters[key];
-          }
-        }
+        for(var key in parameters) this[key] = parameters[key];
       }
     });
 
     return this;
   }
 
-  define(...parameters) {
-    this.clear().add(...parameters);
-
-    return this;
-  }
-
-  remove(...keys) {
-    keys.forEach(key => {
-      this.index(key, index => {
-        this.keys.splice(index, 1);
-        delete this[key];
-      });
-    });
+  unset(...keys) {
+    keys.forEach(key => { this.index(key, index => delete this[key]) });
 
     return this;
   }
@@ -109,7 +155,7 @@ class Parameters {
   }
 
   have(key, callback) {
-    return this.index(key, typeof callback === 'function' ? () => callback.call(this) : null) !== null;
+    return this.keys.includes(key) && (callback.call(this) || true);
   }
 
   each(callback) {
@@ -133,7 +179,7 @@ class Parameters {
   }
 
   clear() {
-    this.remove(...this.keys);
+    this.unset(...this.keys);
 
     return this;
   }
