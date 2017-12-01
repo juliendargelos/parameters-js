@@ -41,7 +41,7 @@ The constructor take the same parameters as the [`define()`](#define--parameters
 
 ## Instance properties
 
-### `flattened` (Array)
+#### `flattened` (Array)
 
 A flat array of objects corresponding to the parameters:
 
@@ -56,7 +56,9 @@ A flat array of objects corresponding to the parameters:
 ]
 ```
 
-### `string` (String)
+---
+
+#### `string` (String)
 
 A string corresponding to the parameters, ready to be used in a url:
 
@@ -68,7 +70,9 @@ Null values or *deep* empty arrays/objects will be ignored.
 
 *Note: By "deep" I mean which doesn't contain any scalar value, nested or not.*
 
-### `object` (Object)
+---
+
+#### `object` (Object)
 
 An object corresponding to the parameters:
 
@@ -83,21 +87,27 @@ An object corresponding to the parameters:
 }
 ```
 
-### `clone` (Parameters)
+---
+
+#### `clone` (Parameters)
 
 A new clone of the current Parameters object.
 
-### `empty` (Boolean)
+---
+
+#### `empty` (Boolean)
 
 True if no value different from null can be found in the parameters, false in the other case.
 
-### `any` (Boolean)
+---
+
+#### `any` (Boolean)
 
 Opposite of `empty`.
 
 ## Instance methods
 
-### `toString()` → String
+#### `toString()` → String
 
 Same thing as getting the [`string`](#string-string) property.
 
@@ -105,7 +115,9 @@ Same thing as getting the [`string`](#string-string) property.
 
 **Return value:**  The value of the [`string`](#string-string) property.
 
-### `add()` → Parameters
+---
+
+#### `add()` → Parameters
 
 Adds parameters to the object.
 
@@ -117,7 +129,9 @@ If it is a String, it will be used as the parmeter name, and its value will be i
 
 **Return value:** `this`
 
-### `define()` → Parameters
+---
+
+#### `define()` → Parameters
 
 Same thing as calling [`clear()`](#clear--parameters) then [`add()`](#add--parameters).
 
@@ -125,7 +139,9 @@ Same thing as calling [`clear()`](#clear--parameters) then [`add()`](#add--param
 
 **Return value:**  `this`
 
-### `remove()` → Parameters
+---
+
+#### `remove()` → Parameters
 
 Removes parameters from the object.
 
@@ -135,7 +151,9 @@ A list of parameters keys to remove.
 
 **Return value:**  `this`
 
-### `index()` → Number|null
+---
+
+#### `index()` → Number|null
 
 Returns the index of the given key in the object. And call the given callback if the index is not null.
 
@@ -148,7 +166,9 @@ The function you want to be called if the index is not null.
 
 **Return value:** The index of the given key in the object.
 
-### `have()` → Boolean
+---
+
+#### `have()` → Boolean
 
 Returns `true` if the object contains the given key, `false` in the other case, and call the given callback if the result is true.
 
@@ -161,7 +181,9 @@ The function you want to be called if parameter exists.
 
 **Return value:** `true` if the object contains the given key, `false` in the other case.
 
-### `each()` → Parameters
+---
+
+#### `each()` → Parameters
 
 Iterate through parameters and call the given callback each time. It will stop if the callback strictly returns `false`.
 
@@ -171,7 +193,9 @@ The function you want to be called. For each parameter, a `key` and a `value` pa
 
 **Return value:**  `this`
 
-### `map()` → Parameters
+---
+
+#### `map()` → Parameters
 
 Iterate through parameters and call the given callback each time. The callback return will set the current parameter value.
 
@@ -181,7 +205,9 @@ The function you want to be called. For each parameter, a `key` and a `value` pa
 
 **Return value:**  `this`
 
-### `reset()` → Parameters
+---
+
+#### `reset()` → Parameters
 
 Set all parameter values to null.
 
@@ -189,7 +215,9 @@ Set all parameter values to null.
 
 **Return value:**  `this`
 
-### `clear()` → Parameters
+---
+
+#### `clear()` → Parameters
 
 Remove all the parameters of the object.
 
@@ -199,7 +227,7 @@ Remove all the parameters of the object.
 
 ## Static methods
 
-### `flatten()` → Parameters
+#### `flatten()` → Parameters
 
 Flatten a value (usually an Array or an Object) to an array.
 
@@ -215,15 +243,17 @@ The flattened array.
 
 **Return value:** The flattened array.
 
-### `key()` → String
+---
+
+#### `key()` → String
 
 Returns the key corresponding to the current key and the new key given.
 
 **Parameters:**
-- `current` (String) *options*:
+- `current` (String) *optional*:
 The current key.
 
-- `key` (String) *options*:
+- `key` (String) *optional*:
 The new key.
 
 **Return value:** The new key.
