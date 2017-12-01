@@ -40,6 +40,16 @@ The constructor take the same parameters as the [`set()`](#set--parameters) meth
 
 ## Instance properties
 
+#### `keys` (Array)
+
+An Array containing parameters keys:
+
+```javascript
+['post', 'date', 'authors']
+```
+
+---
+
 #### `flattened` (Array)
 
 A flat array of objects corresponding to the parameters:
@@ -89,27 +99,27 @@ Opposite of `empty`.
 
 ---
 
-### `inputs` (DocumentFragment)
+#### `inputs` (DocumentFragment)
 
 A set of inputs corresponding the parameters.
 
-**Be careful:** Parameters with a value of type `File` will not be transformed into input type file because this is not impossible. The usual `toString()` method will be called on it.
+**Be careful:** Parameters with a value of type `File` will not be transformed into input type file because this is not possible. The usual `toString()` method will be called on it.
 
 ---
 
-### `form` (HTMLFormElement)
+#### `form` (HTMLFormElement)
 
 A form corresponding the parameters, containing [`inputs`](#inputs-documentfragement).
 
 ---
 
-### `formData` (FormData)
+#### `formData` (FormData)
 
 A FormData instance corresponding to the parameters. Here, `File` instance values will be handled.
 
 ---
 
-### `json` (String)
+#### `json` (String)
 
 A JSON serialized string corresponding to the parameters.
 
