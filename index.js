@@ -71,7 +71,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @property {string[]}keys  The parameters keys.
+   * @member {string[]}keys  The parameters keys.
    */
   get keys() {
     return Object.getOwnPropertyNames(this);
@@ -84,7 +84,7 @@ class Parameters {
    */
 
   /**
-   * @property {FlatParameter[]} flattened A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters.
+   * @member {FlatParameter[]} flattened A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters.
    */
   get flattened() {
     return this.constructor.flatten(this);
@@ -99,7 +99,7 @@ class Parameters {
   }
 
   /**
-   * @property {string} string A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters.
+   * @member {string} string A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters.
    */
   get string() {
     var parameters = [];
@@ -119,7 +119,7 @@ class Parameters {
   }
 
   /**
-   * @property {(FragmentDocument|NodeList|Array)} inputs A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters.
+   * @member {(FragmentDocument|NodeList|Array)} inputs A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters.
    */
   get inputs() {
     var inputs = document.createDocumentFragment();
@@ -162,7 +162,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @property {FormData} formData A FormData corresponding to the parameters.
+   * @member {FormData} formData A FormData corresponding to the parameters.
    */
   get formData() {
     var formData = new FormData();
@@ -172,7 +172,7 @@ class Parameters {
   }
 
   /**
-   * @property {(HTMLFormElement|Element)} form A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters.
+   * @member {(HTMLFormElement|Element)} form A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters.
    */
   get form() {
     var form = document.createElement('form');
@@ -191,7 +191,7 @@ class Parameters {
   }
 
   /**
-   * @property {string} json A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters.
+   * @member {string} json A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters.
    */
   get json() {
     return JSON.stringify(this);
@@ -216,7 +216,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @property {boolean} empty <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
+   * @member {boolean} empty <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
    */
   get empty() {
     var empty = true;
@@ -229,7 +229,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @property {boolean} any Opposite of {@link Parameters#empty}
+   * @member {boolean} any Opposite of {@link Parameters#empty}
    */
   get any() {
     return !this.empty;
