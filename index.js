@@ -1,4 +1,9 @@
 class Parameters {
+
+  /**
+   * Create a Parameters object.
+   * @param {...{(string|Object)}} parameters Same value as {@link Parameters#set}'s parameters.
+   */
   constructor(...parameters) {
     this.set(...parameters);
   }
@@ -63,10 +68,17 @@ class Parameters {
     return current ? current + '[' + key + ']' : key;
   }
 
+  /**
+   * @readonly
+   * @returns {string[]} The parameters keys.
+   */
   get keys() {
     return Object.getOwnPropertyNames(this);
   }
 
+  /**
+   * //@returns {{key: string, value: (string|number|boolean)?}[]} A flat array corresponding to the parameters.
+   */
   get flattened() {
     return this.constructor.flatten(this);
   }
@@ -79,6 +91,9 @@ class Parameters {
     });
   }
 
+  /**
+   * @returns {string} A string corresponding to the parameters, ready to be used in a url.
+   */
   get string() {
     var parameters = [];
 
@@ -96,6 +111,9 @@ class Parameters {
     });
   }
 
+  /**
+   * @returns {(FragmentDocument|NodeList|Array)} A set of inputs corresponding the parameters.
+   */
   get inputs() {
     var inputs = document.createDocumentFragment();
 
@@ -135,6 +153,10 @@ class Parameters {
     });
   }
 
+  /**
+   * @readonly
+   * @returns {FormData} A FormData corresponding to the parameters.
+   */
   get formData() {
     var formData = new FormData();
     this.flattened.forEach(parameter => formData.append(parameter.key, parameter.value));
@@ -142,6 +164,9 @@ class Parameters {
     return formData;
   }
 
+  /**
+   * @returns {(HTMLFormElement|Element)} A Form corresponding to the parameters.
+   */
   get form() {
     var form = document.createElement('form');
     form.appendChild(this.inputs);
@@ -158,6 +183,9 @@ class Parameters {
     }
   }
 
+  /**
+   * @returns {string} A json string corresponding to the parameters.
+   */
   get json() {
     return JSON.stringify(this);
   }
@@ -171,10 +199,18 @@ class Parameters {
     }
   }
 
+  /**
+   * @readonly
+   * @returns {Parameters} A clone of the current parameters.
+   */
   get clone() {
     return new this.constructor(this);
   }
 
+  /**
+   * @readonly
+   * @returns {boolean} True if no value different from null can be found in the parameters, false in the other case.
+   */
   get empty() {
     var empty = true;
     this.each((key, value) => {
@@ -184,14 +220,26 @@ class Parameters {
     return empty;
   }
 
+  /**
+   * @readonly
+   * @returns {boolean} Opposite of {@link Parameters#empty}
+   */
   get any() {
     return !this.empty;
   }
 
+  /**
+   * @returns {string} Value of {@link Parameters#string}
+   */
   toString() {
     return this.string;
   }
 
+  /**
+   * Set parameters.
+   * @param {...{(string|Object)}} parameters The parameters to set. If string given the assumed value will be null.
+   * @returns {Parameters} Itself.
+   */
   set(...parameters) {
     parameters.forEach(parameters => {
       if(typeof parameters === 'string') parameters = {[parameters]: null};
@@ -203,12 +251,26 @@ class Parameters {
     return this;
   }
 
+  /**
+   * Unset parameters.
+   * @param {...{(string)}} keys The parameter keys to unset.
+   * @returns {Parameters} Itself.
+   */
   unset(...keys) {
     keys.forEach(key => { this.index(key, index => delete this[key]) });
 
     return this;
   }
 
+  /**
+   * Looks for the index of the given key and call callback if it was found.
+   * @param {string} key The parameter key whose index your looking for
+   * @param {indexCallback?} callback The function to call if an index has been found for this ket.
+   * @returns {number?} The index of the given key if it exists, null in the other case.
+   *
+   * @callback indexCallback
+   * @param {number} index The index of the key.
+   */
   index(key, callback) {
     var index = this.keys.indexOf(key);
     if(index === -1) index = null;
@@ -217,10 +279,28 @@ class Parameters {
     return index;
   }
 
+  /**
+   * Checks that the given key exists and call a callback if it exists.
+   * @param {string} key The parameter key you want to check the existence.
+   * @param {haveCallback?} callback The function to call if the key exists.
+   * @returns {boolean} True if the key exists, false in the other case.
+   *
+   * @callback haveCallback
+   */
   have(key, callback) {
     return this.keys.includes(key) && (callback.call(this) || true);
   }
 
+  /**
+   * Iterates through parameters.
+   * @param {eachCallback} callback The function to call for each parameter.
+   * @returns {Parameters} Itself.
+   *
+   * @callback eachCallback
+   * @param {string} key The current key.
+   * @param {} value The current value.
+   * @returns {boolean?} If strictly equal to false, will stop iterating.
+   */
   each(callback) {
     this.keys.forEach(key => {
       if(callback.call(this, key, this[key]) === false) return false;
@@ -229,18 +309,36 @@ class Parameters {
     return this;
   }
 
+  /**
+   * Iterates through parameters and replaces values.
+   * @param {mapCallback} callback The function to call for each parameter.
+   * @returns {Parameters} Itself.
+   *
+   * @callback mapCallback
+   * @param {string} key The current key.
+   * @param {} value The current value.
+   * @returns {} The value that will replace the current value.
+   */
   map(callback) {
     this.each((key, value) => { this[key] = callback.call(this, key, value) });
 
     return this;
   }
 
+  /**
+   * Set all parameter values to null.
+   * @returns {Parameters} Itself
+   */
   reset() {
     this.map(() => null);
 
     return this;
   }
 
+  /**
+   * Removes all the parameters.
+   * @returns {Parameters} Itself
+   */
   clear() {
     this.unset(...this.keys);
 

@@ -1,10 +1,11 @@
 {
   "name": "parameters-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simply manage url parameters.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc2md index.js --template README.hbs --partial partials/*.hbs > README.md"
   },
   "repository": {
     "type": "git",
@@ -12,8 +13,15 @@
   },
   "keywords": [
     "parameters",
-    "http"
+    "http",
+    "data",
+    "form",
+    "formdata",
+    "inputs"
   ],
   "author": "Julien Dargelos",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jsdoc-to-markdown": "^3.0.2"
+  }
 }

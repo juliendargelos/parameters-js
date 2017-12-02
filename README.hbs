@@ -1,0 +1,32 @@
+# Parameters JS 🎚
+
+Simply manage url parameters.
+
+## Install
+
+```
+npm install parameters-js
+```
+
+## Usage
+
+```javascript
+var parameters = new Parameters();
+
+parameters.post = 2;
+parameters.string;
+// => "post=2"
+
+parameters.date = '10/12/1997';
+parameters.string;
+// => "post=2&date=10%2F12%2F1997"
+
+parameters.authors = [
+    {name: 'Marie', country: 'England'},
+    {name: 'Marc', country: 'France'}
+];
+parameters.string;
+// => "post=2&date=10%2F12%2F1997&authors[][name]=Marie&authors[][country]=England&authors[][name]=Marc&authors[][country]=France"
+```
+
+{{>main}}
