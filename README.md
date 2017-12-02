@@ -36,16 +36,16 @@ parameters.string;
 
 * [Parameters](#Parameters)
     * [new Parameters(...parameters)](#new_Parameters_new)
-    * [.keys](#Parameters+keys) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.flattened](#Parameters+flattened) ⇒ [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter)
-    * [.string](#Parameters+string) ⇒ <code>string</code>
-    * [.inputs](#Parameters+inputs) ⇒ <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code>
-    * [.formData](#Parameters+formData) ⇒ <code>FormData</code>
-    * [.form](#Parameters+form) ⇒ <code>HTMLFormElement</code> \| <code>Element</code>
-    * [.json](#Parameters+json) ⇒ <code>string</code>
+    * [.keys](#Parameters+keys)
+    * [.flattened](#Parameters+flattened)
+    * [.string](#Parameters+string)
+    * [.inputs](#Parameters+inputs)
+    * [.formData](#Parameters+formData)
+    * [.form](#Parameters+form)
+    * [.json](#Parameters+json)
     * [.clone](#Parameters+clone) ⇒ [<code>Parameters</code>](#Parameters)
-    * [.empty](#Parameters+empty) ⇒ <code>boolean</code>
-    * [.any](#Parameters+any) ⇒ <code>boolean</code>
+    * [.empty](#Parameters+empty)
+    * [.any](#Parameters+any)
     * [.toString()](#Parameters+toString) ⇒ <code>string</code>
     * [.set(...parameters)](#Parameters+set) ⇒ [<code>Parameters</code>](#Parameters)
     * [.unset(...keys)](#Parameters+unset) ⇒ [<code>Parameters</code>](#Parameters)
@@ -68,41 +68,76 @@ Create a [Parameters](#Parameters) object.
 
 <a name="Parameters+keys"></a>
 
-### parameters.keys ⇒ <code>Array.&lt;string&gt;</code>
+### parameters.keys
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>Array.&lt;string&gt;</code> - The parameters keys.  
 **Read only**: true  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| The | <code>Array.&lt;string&gt;</code> | parameters keys. |
+
 <a name="Parameters+flattened"></a>
 
-### parameters.flattened ⇒ [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter)
+### parameters.flattened
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) - A flat array corresponding to the parameters.  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) | flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters. |
+
 <a name="Parameters+string"></a>
 
-### parameters.string ⇒ <code>string</code>
+### parameters.string
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>string</code> - A string corresponding to the parameters, ready to be used in a url.  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | <code>string</code> | string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters. |
+
 <a name="Parameters+inputs"></a>
 
-### parameters.inputs ⇒ <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code>
+### parameters.inputs
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> - A set of inputs corresponding the parameters.  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> | set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters. |
+
 <a name="Parameters+formData"></a>
 
-### parameters.formData ⇒ <code>FormData</code>
+### parameters.formData
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>FormData</code> - A FormData corresponding to the parameters.  
 **Read only**: true  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | <code>FormData</code> | FormData corresponding to the parameters. |
+
 <a name="Parameters+form"></a>
 
-### parameters.form ⇒ <code>HTMLFormElement</code> \| <code>Element</code>
+### parameters.form
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>HTMLFormElement</code> \| <code>Element</code> - A Form corresponding to the parameters.  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | <code>HTMLFormElement</code> \| <code>Element</code> | Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters. |
+
 <a name="Parameters+json"></a>
 
-### parameters.json ⇒ <code>string</code>
+### parameters.json
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>string</code> - A json string corresponding to the parameters.  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| A | <code>string</code> | json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters. |
+
 <a name="Parameters+clone"></a>
 
 ### parameters.clone ⇒ [<code>Parameters</code>](#Parameters)
@@ -111,16 +146,26 @@ Create a [Parameters](#Parameters) object.
 **Read only**: true  
 <a name="Parameters+empty"></a>
 
-### parameters.empty ⇒ <code>boolean</code>
+### parameters.empty
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>boolean</code> - <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.  
 **Read only**: true  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| &lt;code&gt;true&lt;/code&gt; | <code>boolean</code> | if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case. |
+
 <a name="Parameters+any"></a>
 
-### parameters.any ⇒ <code>boolean</code>
+### parameters.any
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>boolean</code> - Opposite of [empty](#Parameters+empty)  
 **Read only**: true  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| Opposite | <code>boolean</code> | of [empty](#Parameters+empty) |
+
 <a name="Parameters+toString"></a>
 
 ### parameters.toString() ⇒ <code>string</code>

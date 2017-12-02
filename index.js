@@ -70,7 +70,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @returns {string[]} The parameters keys.
+   * @property {string[]} The parameters keys.
    */
   get keys() {
     return Object.getOwnPropertyNames(this);
@@ -83,7 +83,7 @@ class Parameters {
    */
 
   /**
-   * @returns {FlatParameter[]} A flat array corresponding to the parameters.
+   * @property {FlatParameter[]} A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters.
    */
   get flattened() {
     return this.constructor.flatten(this);
@@ -98,7 +98,7 @@ class Parameters {
   }
 
   /**
-   * @returns {string} A string corresponding to the parameters, ready to be used in a url.
+   * @property {string} A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters.
    */
   get string() {
     var parameters = [];
@@ -118,7 +118,7 @@ class Parameters {
   }
 
   /**
-   * @returns {(FragmentDocument|NodeList|Array)} A set of inputs corresponding the parameters.
+   * @property {(FragmentDocument|NodeList|Array)} A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters.
    */
   get inputs() {
     var inputs = document.createDocumentFragment();
@@ -161,7 +161,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @returns {FormData} A FormData corresponding to the parameters.
+   * @property {FormData} A FormData corresponding to the parameters.
    */
   get formData() {
     var formData = new FormData();
@@ -171,7 +171,7 @@ class Parameters {
   }
 
   /**
-   * @returns {(HTMLFormElement|Element)} A Form corresponding to the parameters.
+   * @property {(HTMLFormElement|Element)} A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters.
    */
   get form() {
     var form = document.createElement('form');
@@ -190,7 +190,7 @@ class Parameters {
   }
 
   /**
-   * @returns {string} A json string corresponding to the parameters.
+   * @property {string} A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters.
    */
   get json() {
     return JSON.stringify(this);
@@ -215,7 +215,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @returns {boolean} <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
+   * @property {boolean} <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
    */
   get empty() {
     var empty = true;
@@ -228,7 +228,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @returns {boolean} Opposite of {@link Parameters#empty}
+   * @property {boolean} Opposite of {@link Parameters#empty}
    */
   get any() {
     return !this.empty;
