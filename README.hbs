@@ -30,7 +30,7 @@ parameters.string;
 
 var otherParameters = new Parameters();
 otherParameters.string = "post=2&date=10%2F12%2F1997&authors[][name]=Marie&authors[][country]=England&authors[][name]=Marc&authors[][country]=France";
-parameters;
+otherParameters;
 // => Parameters {
 //      post: '2',
 //      date: '10/12/1997',
