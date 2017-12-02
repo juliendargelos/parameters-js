@@ -276,7 +276,7 @@ class Parameters {
   /**
    * Looks for the index of the given key and call callback if it was found.
    * @param {string} key The parameter key whose index your looking for
-   * @param {indexCallback?} callback The function to call if an index has been found for this ket.
+   * @param {indexCallback=} callback The function to call if an index has been found for this ket.
    * @returns {number?} The index of the given key if it exists, null in the other case.
    */
   index(key, callback) {
@@ -294,7 +294,7 @@ class Parameters {
   /**
    * Checks that the given key exists and call a callback if it exists.
    * @param {string} key The parameter key you want to check the existence.
-   * @param {haveCallback?} callback The function to call if the key exists.
+   * @param {haveCallback=} callback The function to call if the key exists.
    * @returns {boolean} <code>true</code> if the key exists, false in the other case.
    */
   have(key, callback) {
@@ -304,7 +304,7 @@ class Parameters {
   /**
    * @callback eachCallback
    * @param {string} key The current key.
-   * @param {} value The current value.
+   * @param {*} value The current value.
    * @returns {boolean?} If strictly equal to <code>false</code>, will stop iterating.
    */
 
@@ -324,8 +324,8 @@ class Parameters {
   /**
    * @callback mapCallback
    * @param {string} key The current key.
-   * @param {} value The current value.
-   * @returns {} The value that will replace the current value.
+   * @param {*} value The current value.
+   * @returns {*} The value that will replace the current value.
    */
 
   /**

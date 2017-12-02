@@ -49,8 +49,8 @@ parameters.string;
     * [.toString()](#Parameters+toString) ⇒ <code>string</code>
     * [.set(...parameters)](#Parameters+set) ⇒ [<code>Parameters</code>](#Parameters)
     * [.unset(...keys)](#Parameters+unset) ⇒ [<code>Parameters</code>](#Parameters)
-    * [.index(key, callback)](#Parameters+index) ⇒ <code>number</code>
-    * [.have(key, callback)](#Parameters+have) ⇒ <code>boolean</code>
+    * [.index(key, [callback])](#Parameters+index) ⇒ <code>number</code>
+    * [.have(key, [callback])](#Parameters+have) ⇒ <code>boolean</code>
     * [.each(callback)](#Parameters+each) ⇒ [<code>Parameters</code>](#Parameters)
     * [.map(callback)](#Parameters+map) ⇒ [<code>Parameters</code>](#Parameters)
     * [.reset()](#Parameters+reset) ⇒ [<code>Parameters</code>](#Parameters)
@@ -152,7 +152,7 @@ Unset parameters.
 
 <a name="Parameters+index"></a>
 
-### parameters.index(key, callback) ⇒ <code>number</code>
+### parameters.index(key, [callback]) ⇒ <code>number</code>
 Looks for the index of the given key and call callback if it was found.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
@@ -161,11 +161,11 @@ Looks for the index of the given key and call callback if it was found.
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | The parameter key whose index your looking for |
-| callback | [<code>indexCallback</code>](#indexCallback) | The function to call if an index has been found for this ket. |
+| [callback] | [<code>indexCallback</code>](#indexCallback) | The function to call if an index has been found for this ket. |
 
 <a name="Parameters+have"></a>
 
-### parameters.have(key, callback) ⇒ <code>boolean</code>
+### parameters.have(key, [callback]) ⇒ <code>boolean</code>
 Checks that the given key exists and call a callback if it exists.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
@@ -174,7 +174,7 @@ Checks that the given key exists and call a callback if it exists.
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | The parameter key you want to check the existence. |
-| callback | [<code>haveCallback</code>](#haveCallback) | The function to call if the key exists. |
+| [callback] | [<code>haveCallback</code>](#haveCallback) | The function to call if the key exists. |
 
 <a name="Parameters+each"></a>
 
@@ -247,18 +247,18 @@ Removes all the parameters.
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | The current key. |
-| value |  | The current value. |
+| value | <code>\*</code> | The current value. |
 
 <a name="mapCallback"></a>
 
-## mapCallback ⇒
+## mapCallback ⇒ <code>\*</code>
 **Kind**: global typedef  
-**Returns**: The value that will replace the current value.  
+**Returns**: <code>\*</code> - The value that will replace the current value.  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | The current key. |
-| value |  | The current value. |
+| value | <code>\*</code> | The current value. |
 
 ## Typedefs
 
@@ -271,7 +271,7 @@ Removes all the parameters.
 <dd></dd>
 <dt><a href="#eachCallback">eachCallback</a> ⇒ <code>boolean</code></dt>
 <dd></dd>
-<dt><a href="#mapCallback">mapCallback</a> ⇒</dt>
+<dt><a href="#mapCallback">mapCallback</a> ⇒ <code>*</code></dt>
 <dd></dd>
 </dl>
 
