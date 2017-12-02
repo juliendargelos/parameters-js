@@ -276,7 +276,7 @@ class Parameters {
   /**
    * Looks for the index of the given key and call callback if it was found.
    * @param {string} key The parameter key whose index your looking for
-   * @param {indexCallback=} callback The function to call if an index has been found for this ket.
+   * @param {indexCallback=} callback The function to call if an index has been found for this key.
    * @returns {number?} The index of the given key if it exists, null in the other case.
    */
   index(key, callback) {

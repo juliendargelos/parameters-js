@@ -206,7 +206,7 @@ Looks for the index of the given key and call callback if it was found.
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | The parameter key whose index your looking for |
-| [callback] | [<code>indexCallback</code>](#indexCallback) | The function to call if an index has been found for this ket. |
+| [callback] | [<code>indexCallback</code>](#indexCallback) | The function to call if an index has been found for this key. |
 
 <a name="Parameters+have"></a>
 
