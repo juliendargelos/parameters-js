@@ -29,6 +29,8 @@ parameters.string;
 // => "post=2&date=10%2F12%2F1997&authors[][name]=Marie&authors[][country]=England&authors[][name]=Marc&authors[][country]=France"
 ```
 
+<a name="Parameters"></a>
+
 ## Parameters
 **Kind**: global class  
 
@@ -54,6 +56,8 @@ parameters.string;
     * [.reset()](#Parameters+reset) ⇒ [<code>Parameters</code>](#Parameters)
     * [.clear()](#Parameters+clear) ⇒ [<code>Parameters</code>](#Parameters)
 
+<a name="new_Parameters_new"></a>
+
 ### new Parameters(...parameters)
 Create a [Parameters](#Parameters) object.
 
@@ -62,44 +66,68 @@ Create a [Parameters](#Parameters) object.
 | --- | --- | --- |
 | ...parameters | <code>Object</code> | Same value as [set](#Parameters+set)'s parameters. |
 
+<a name="Parameters+keys"></a>
+
 ### parameters.keys ⇒ <code>Array.&lt;string&gt;</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>Array.&lt;string&gt;</code> - The parameters keys.  
 **Read only**: true  
+<a name="Parameters+flattened"></a>
+
 ### parameters.flattened ⇒ [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter)
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) - A flat array corresponding to the parameters.  
+<a name="Parameters+string"></a>
+
 ### parameters.string ⇒ <code>string</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>string</code> - A string corresponding to the parameters, ready to be used in a url.  
+<a name="Parameters+inputs"></a>
+
 ### parameters.inputs ⇒ <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> - A set of inputs corresponding the parameters.  
+<a name="Parameters+formData"></a>
+
 ### parameters.formData ⇒ <code>FormData</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>FormData</code> - A FormData corresponding to the parameters.  
 **Read only**: true  
+<a name="Parameters+form"></a>
+
 ### parameters.form ⇒ <code>HTMLFormElement</code> \| <code>Element</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>HTMLFormElement</code> \| <code>Element</code> - A Form corresponding to the parameters.  
+<a name="Parameters+json"></a>
+
 ### parameters.json ⇒ <code>string</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>string</code> - A json string corresponding to the parameters.  
+<a name="Parameters+clone"></a>
+
 ### parameters.clone ⇒ [<code>Parameters</code>](#Parameters)
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - A clone of the current parameters.  
 **Read only**: true  
+<a name="Parameters+empty"></a>
+
 ### parameters.empty ⇒ <code>boolean</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>boolean</code> - <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.  
 **Read only**: true  
+<a name="Parameters+any"></a>
+
 ### parameters.any ⇒ <code>boolean</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>boolean</code> - Opposite of [empty](#Parameters+empty)  
 **Read only**: true  
+<a name="Parameters+toString"></a>
+
 ### parameters.toString() ⇒ <code>string</code>
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>string</code> - Value of [string](#Parameters+string)  
+<a name="Parameters+set"></a>
+
 ### parameters.set(...parameters) ⇒ [<code>Parameters</code>](#Parameters)
 Set parameters.
 
@@ -110,6 +138,8 @@ Set parameters.
 | --- | --- | --- |
 | ...parameters | <code>string</code> \| <code>Object</code> | The parameters to set. If string given the assumed value will be <code>null</code>. |
 
+<a name="Parameters+unset"></a>
+
 ### parameters.unset(...keys) ⇒ [<code>Parameters</code>](#Parameters)
 Unset parameters.
 
@@ -119,6 +149,8 @@ Unset parameters.
 | Param | Type | Description |
 | --- | --- | --- |
 | ...keys | <code>Object</code> | The parameter keys to unset. |
+
+<a name="Parameters+index"></a>
 
 ### parameters.index(key, callback) ⇒ <code>number</code>
 Looks for the index of the given key and call callback if it was found.
@@ -131,6 +163,8 @@ Looks for the index of the given key and call callback if it was found.
 | key | <code>string</code> | The parameter key whose index your looking for |
 | callback | [<code>indexCallback</code>](#indexCallback) | The function to call if an index has been found for this ket. |
 
+<a name="Parameters+have"></a>
+
 ### parameters.have(key, callback) ⇒ <code>boolean</code>
 Checks that the given key exists and call a callback if it exists.
 
@@ -142,6 +176,8 @@ Checks that the given key exists and call a callback if it exists.
 | key | <code>string</code> | The parameter key you want to check the existence. |
 | callback | [<code>haveCallback</code>](#haveCallback) | The function to call if the key exists. |
 
+<a name="Parameters+each"></a>
+
 ### parameters.each(callback) ⇒ [<code>Parameters</code>](#Parameters)
 Iterates through parameters.
 
@@ -151,6 +187,8 @@ Iterates through parameters.
 | Param | Type | Description |
 | --- | --- | --- |
 | callback | [<code>eachCallback</code>](#eachCallback) | The function to call for each parameter. |
+
+<a name="Parameters+map"></a>
 
 ### parameters.map(callback) ⇒ [<code>Parameters</code>](#Parameters)
 Iterates through parameters and replaces values.
@@ -162,16 +200,22 @@ Iterates through parameters and replaces values.
 | --- | --- | --- |
 | callback | [<code>mapCallback</code>](#mapCallback) | The function to call for each parameter. |
 
+<a name="Parameters+reset"></a>
+
 ### parameters.reset() ⇒ [<code>Parameters</code>](#Parameters)
 Set all parameter values to <code>null</code>.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - Itself  
+<a name="Parameters+clear"></a>
+
 ### parameters.clear() ⇒ [<code>Parameters</code>](#Parameters)
 Removes all the parameters.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - Itself  
+<a name="FlatParameter"></a>
+
 ## FlatParameter : <code>Object</code>
 **Kind**: global typedef  
 **Properties**
@@ -181,6 +225,8 @@ Removes all the parameters.
 | key | <code>string</code> | The flattened key of the parameter. |
 | value | <code>string</code> \| <code>number</code> \| <code>boolean</code> | The value of the parameter |
 
+<a name="indexCallback"></a>
+
 ## indexCallback : <code>function</code>
 **Kind**: global typedef  
 
@@ -188,8 +234,12 @@ Removes all the parameters.
 | --- | --- | --- |
 | index | <code>number</code> | The index of the key. |
 
+<a name="haveCallback"></a>
+
 ## haveCallback : <code>function</code>
 **Kind**: global typedef  
+<a name="eachCallback"></a>
+
 ## eachCallback ⇒ <code>boolean</code>
 **Kind**: global typedef  
 **Returns**: <code>boolean</code> - If strictly equal to <code>false</code>, will stop iterating.  
@@ -198,6 +248,8 @@ Removes all the parameters.
 | --- | --- | --- |
 | key | <code>string</code> | The current key. |
 | value |  | The current value. |
+
+<a name="mapCallback"></a>
 
 ## mapCallback ⇒
 **Kind**: global typedef  
