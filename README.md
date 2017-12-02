@@ -75,7 +75,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| The | <code>Array.&lt;string&gt;</code> | parameters keys. |
+| keys | <code>Array.&lt;string&gt;</code> | The parameters keys. |
 
 <a name="Parameters+flattened"></a>
 
@@ -85,7 +85,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) | flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters. |
+| flattened | [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) | A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters. |
 
 <a name="Parameters+string"></a>
 
@@ -95,7 +95,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | <code>string</code> | string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters. |
+| string | <code>string</code> | A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters. |
 
 <a name="Parameters+inputs"></a>
 
@@ -105,7 +105,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> | set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters. |
+| inputs | <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> | A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters. |
 
 <a name="Parameters+formData"></a>
 
@@ -116,7 +116,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | <code>FormData</code> | FormData corresponding to the parameters. |
+| formData | <code>FormData</code> | A FormData corresponding to the parameters. |
 
 <a name="Parameters+form"></a>
 
@@ -126,7 +126,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | <code>HTMLFormElement</code> \| <code>Element</code> | Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters. |
+| form | <code>HTMLFormElement</code> \| <code>Element</code> | A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters. |
 
 <a name="Parameters+json"></a>
 
@@ -136,13 +136,13 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| A | <code>string</code> | json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters. |
+| json | <code>string</code> | A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters. |
 
 <a name="Parameters+clone"></a>
 
 ### parameters.clone ⇒ [<code>Parameters</code>](#Parameters)
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: [<code>Parameters</code>](#Parameters) - A clone of the current parameters.  
+**Returns**: [<code>Parameters</code>](#Parameters) - clone A clone of the current parameters.  
 **Read only**: true  
 <a name="Parameters+empty"></a>
 
@@ -153,7 +153,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| &lt;code&gt;true&lt;/code&gt; | <code>boolean</code> | if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case. |
+| empty | <code>boolean</code> | <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case. |
 
 <a name="Parameters+any"></a>
 
@@ -164,7 +164,7 @@ Create a [Parameters](#Parameters) object.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| Opposite | <code>boolean</code> | of [empty](#Parameters+empty) |
+| any | <code>boolean</code> | Opposite of [empty](#Parameters+empty) |
 
 <a name="Parameters+toString"></a>
 
