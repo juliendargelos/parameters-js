@@ -1,7 +1,7 @@
 class Parameters {
 
   /**
-   * Create a Parameters object.
+   * Create a {@link Parameters} object.
    * @param {...{(string|Object)}} parameters Same value as {@link Parameters#set}'s parameters.
    */
   constructor(...parameters) {
@@ -77,7 +77,13 @@ class Parameters {
   }
 
   /**
-   * //@returns {{key: string, value: (string|number|boolean)?}[]} A flat array corresponding to the parameters.
+   * @typedef {Object} FlatParameter
+   * @property {string} key The flattened key of the parameter.
+   * @property {(string|number|boolean)?} value The value of the parameter
+   */
+
+  /**
+   * @returns {FlatParameter[]} A flat array corresponding to the parameters.
    */
   get flattened() {
     return this.constructor.flatten(this);
@@ -209,7 +215,7 @@ class Parameters {
 
   /**
    * @readonly
-   * @returns {boolean} True if no value different from null can be found in the parameters, false in the other case.
+   * @returns {boolean} <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
    */
   get empty() {
     var empty = true;
@@ -237,7 +243,7 @@ class Parameters {
 
   /**
    * Set parameters.
-   * @param {...{(string|Object)}} parameters The parameters to set. If string given the assumed value will be null.
+   * @param {...(string|Object)} parameters The parameters to set. If string given the assumed value will be <code>null</code>.
    * @returns {Parameters} Itself.
    */
   set(...parameters) {
@@ -289,7 +295,7 @@ class Parameters {
    * Checks that the given key exists and call a callback if it exists.
    * @param {string} key The parameter key you want to check the existence.
    * @param {haveCallback?} callback The function to call if the key exists.
-   * @returns {boolean} True if the key exists, false in the other case.
+   * @returns {boolean} <code>true</code> if the key exists, false in the other case.
    */
   have(key, callback) {
     return this.keys.includes(key) && (callback.call(this) || true);
@@ -299,7 +305,7 @@ class Parameters {
    * @callback eachCallback
    * @param {string} key The current key.
    * @param {} value The current value.
-   * @returns {boolean?} If strictly equal to false, will stop iterating.
+   * @returns {boolean?} If strictly equal to <code>false</code>, will stop iterating.
    */
 
   /**
@@ -334,7 +340,7 @@ class Parameters {
   }
 
   /**
-   * Set all parameter values to null.
+   * Set all parameter values to <code>null</code>.
    * @returns {Parameters} Itself
    */
   reset() {

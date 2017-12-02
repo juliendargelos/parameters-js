@@ -35,7 +35,7 @@ parameters.string;
 * [Parameters](#Parameters)
     * [new Parameters(...parameters)](#new_Parameters_new)
     * [.keys](#Parameters+keys) ⇒ <code>Array.&lt;string&gt;</code>
-    * [.flattened](#Parameters+flattened)
+    * [.flattened](#Parameters+flattened) ⇒ [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter)
     * [.string](#Parameters+string) ⇒ <code>string</code>
     * [.inputs](#Parameters+inputs) ⇒ <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code>
     * [.formData](#Parameters+formData) ⇒ <code>FormData</code>
@@ -55,7 +55,7 @@ parameters.string;
     * [.clear()](#Parameters+clear) ⇒ [<code>Parameters</code>](#Parameters)
 
 ### new Parameters(...parameters)
-Create a Parameters object.
+Create a [Parameters](#Parameters) object.
 
 
 | Param | Type | Description |
@@ -66,10 +66,9 @@ Create a Parameters object.
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>Array.&lt;string&gt;</code> - The parameters keys.  
 **Read only**: true  
-### parameters.flattened
-//@returns {{key: string, value: (string|number|boolean)?}[]} A flat array corresponding to the parameters.
-
+### parameters.flattened ⇒ [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter)
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
+**Returns**: [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) - A flat array corresponding to the parameters.  
 ### parameters.string ⇒ <code>string</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
 **Returns**: <code>string</code> - A string corresponding to the parameters, ready to be used in a url.  
@@ -92,7 +91,7 @@ Create a Parameters object.
 **Read only**: true  
 ### parameters.empty ⇒ <code>boolean</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>boolean</code> - True if no value different from null can be found in the parameters, false in the other case.  
+**Returns**: <code>boolean</code> - <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.  
 **Read only**: true  
 ### parameters.any ⇒ <code>boolean</code>
 **Kind**: instance property of [<code>Parameters</code>](#Parameters)  
@@ -109,7 +108,7 @@ Set parameters.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| ...parameters | <code>Object</code> | The parameters to set. If string given the assumed value will be null. |
+| ...parameters | <code>string</code> \| <code>Object</code> | The parameters to set. If string given the assumed value will be <code>null</code>. |
 
 ### parameters.unset(...keys) ⇒ [<code>Parameters</code>](#Parameters)
 Unset parameters.
@@ -136,7 +135,7 @@ Looks for the index of the given key and call callback if it was found.
 Checks that the given key exists and call a callback if it exists.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>boolean</code> - True if the key exists, false in the other case.  
+**Returns**: <code>boolean</code> - <code>true</code> if the key exists, false in the other case.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -164,7 +163,7 @@ Iterates through parameters and replaces values.
 | callback | [<code>mapCallback</code>](#mapCallback) | The function to call for each parameter. |
 
 ### parameters.reset() ⇒ [<code>Parameters</code>](#Parameters)
-Set all parameter values to null.
+Set all parameter values to <code>null</code>.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - Itself  
@@ -173,6 +172,15 @@ Removes all the parameters.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - Itself  
+## FlatParameter : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | The flattened key of the parameter. |
+| value | <code>string</code> \| <code>number</code> \| <code>boolean</code> | The value of the parameter |
+
 ## indexCallback : <code>function</code>
 **Kind**: global typedef  
 
@@ -184,7 +192,7 @@ Removes all the parameters.
 **Kind**: global typedef  
 ## eachCallback ⇒ <code>boolean</code>
 **Kind**: global typedef  
-**Returns**: <code>boolean</code> - If strictly equal to false, will stop iterating.  
+**Returns**: <code>boolean</code> - If strictly equal to <code>false</code>, will stop iterating.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -203,6 +211,8 @@ Removes all the parameters.
 ## Typedefs
 
 <dl>
+<dt><a href="#FlatParameter">FlatParameter</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#indexCallback">indexCallback</a> : <code>function</code></dt>
 <dd></dd>
 <dt><a href="#haveCallback">haveCallback</a> : <code>function</code></dt>
