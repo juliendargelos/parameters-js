@@ -263,13 +263,15 @@ class Parameters {
   }
 
   /**
+   * @callback indexCallback
+   * @param {number} index The index of the key.
+   */
+
+  /**
    * Looks for the index of the given key and call callback if it was found.
    * @param {string} key The parameter key whose index your looking for
    * @param {indexCallback?} callback The function to call if an index has been found for this ket.
    * @returns {number?} The index of the given key if it exists, null in the other case.
-   *
-   * @callback indexCallback
-   * @param {number} index The index of the key.
    */
   index(key, callback) {
     var index = this.keys.indexOf(key);
@@ -280,26 +282,30 @@ class Parameters {
   }
 
   /**
+   * @callback haveCallback
+   */
+
+  /**
    * Checks that the given key exists and call a callback if it exists.
    * @param {string} key The parameter key you want to check the existence.
    * @param {haveCallback?} callback The function to call if the key exists.
    * @returns {boolean} True if the key exists, false in the other case.
-   *
-   * @callback haveCallback
    */
   have(key, callback) {
     return this.keys.includes(key) && (callback.call(this) || true);
   }
 
   /**
-   * Iterates through parameters.
-   * @param {eachCallback} callback The function to call for each parameter.
-   * @returns {Parameters} Itself.
-   *
    * @callback eachCallback
    * @param {string} key The current key.
    * @param {} value The current value.
    * @returns {boolean?} If strictly equal to false, will stop iterating.
+   */
+
+  /**
+   * Iterates through parameters.
+   * @param {eachCallback} callback The function to call for each parameter.
+   * @returns {Parameters} Itself.
    */
   each(callback) {
     this.keys.forEach(key => {
@@ -310,14 +316,16 @@ class Parameters {
   }
 
   /**
-   * Iterates through parameters and replaces values.
-   * @param {mapCallback} callback The function to call for each parameter.
-   * @returns {Parameters} Itself.
-   *
    * @callback mapCallback
    * @param {string} key The current key.
    * @param {} value The current value.
    * @returns {} The value that will replace the current value.
+   */
+
+  /**
+   * Iterates through parameters and replaces values.
+   * @param {mapCallback} callback The function to call for each parameter.
+   * @returns {Parameters} Itself.
    */
   map(callback) {
     this.each((key, value) => { this[key] = callback.call(this, key, value) });
