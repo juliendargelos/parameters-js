@@ -10,6 +10,8 @@ npm install parameters-js
 
 ## Usage
 
+#### Basic
+
 ```javascript
 var parameters = new Parameters();
 
@@ -27,11 +29,82 @@ parameters.authors = [
 ];
 parameters.string;
 // => "post=2&date=10%2F12%2F1997&authors[][name]=Marie&authors[][country]=England&authors[][name]=Marc&authors[][country]=France"
+
+parameters.json;
+// => '{
+//       "post": 2,
+//       "date": "10/12/1997",
+//       "authors": [
+//         {"name": "Marie", "country": "England"},
+//         {"name": "Marc", "country": "France"}
+//       ]
+//     }'
+
+parameters.inputs
+// => DocumentFragment
+//      <input type="hidden" name="post" value="2">
+//      <input type="hidden" name="date" value="10/12/1997">
+//      <input type="hidden" name="authors[][name]" value="Marie">
+//      <input type="hidden" name="authors[][country]" value="England">
+//      <input type="hidden" name="authors[][name]" value="Marc">
+//      <input type="hidden" name="authors[][country]" value="France">
+
+parameters.form
+// => <form>
+//      <input type="hidden" name="post" value="2">
+//      <input type="hidden" name="date" value="10/12/1997">
+//      <input type="hidden" name="authors[][name]" value="Marie">
+//      <input type="hidden" name="authors[][country]" value="England">
+//      <input type="hidden" name="authors[][name]" value="Marc">
+//      <input type="hidden" name="authors[][country]" value="France">
+//    </form>
+
+parameters.formData
+// => FormData
 ```
 
 ```javascript
 "https://www.google.com?" + (new Parameters({q: 'keyword'}));
 // => "https://www.google.com?q=keyword"
+```
+
+#### Parsing
+
+```javascript
+var parameters = new Parameters();
+parameters.string = "post=2&date=10%2F12%2F1997&authors[][name]=Marie&authors[][country]=England&authors[][name]=Marc&authors[][country]=France";
+parameters;
+// => Parameters {
+//      post: '2',
+//      date: '10/12/1997',
+//      authors: [
+//        {name: 'Marie', country: 'England'},
+//        {name: 'Marc', country: 'France'}
+//      ]
+//    }
+
+parameters.json = '{"post": 2,"date": "10/12/1997","authors": [{"name": "Marie", "country": "England"},{"name": "Marc", "country": "France"}]}';
+// => ...
+
+parameters.inputs = document.querySelectorAll('form input');
+parameters;
+// <form>
+//   <input type="email" name="user[email]" value="lucie@mail.com">
+//   <input type="text" name="user[name]" value="Lucie">
+//   <input type="number" name="user[age]" value="22">
+//   <input type="checkbox" name="likes_coffee" checked>
+// </form>
+//
+// => Parameters {
+//      user: {
+//        email: 'lucie@mail.com'
+//        name: 'Lucie',
+//        age: 22
+//      },
+//      likes_coffee: true
+
+parameters.form = document.querySelector('form');
+// => ...
 ```
 
 ## Constructor

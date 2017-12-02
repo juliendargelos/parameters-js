@@ -22,6 +22,43 @@ class Parameters {
     return flattened;
   }
 
+  static deepen(object, key, value) {
+    var match = key.match(/^[\[\]]*([^\[\]]+)\]*/);
+    var after = key.substring(match[0].length) || ''
+    var key = match[1] || ''
+    value = decodeURIComponent(value);
+
+    if(key === '') return;
+
+    if(after === '') object[key] = value;
+    else if(after === '[]') {
+      if(!object[key]) object[key] = [];
+      object[key].push(value);
+    }
+    else {
+      match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
+
+      if(match) {
+        var childKey = match[1];
+        if(!object[key]) object[key] = [];
+
+        var last = object[key].length - 1;
+        if(last < 0) last = 0;
+
+        if(typeof object[key][last] === 'object' && object[key][last] !== null && !Object.keys(object[key][last]).includes(childKey)) {
+          this.deepen(object[key][last], childKey, value);
+        }
+        else object[key].push(this.deepen(new object.constructor(), childKey, value));
+      }
+      else {
+        if(!object[key]) object[key] = new object.constructor();
+        object[key] = this.deepen(object[key], after, value);
+      }
+    }
+
+    return object;
+  }
+
   static key(current, key) {
     return current ? current + '[' + key + ']' : key;
   }
@@ -34,6 +71,14 @@ class Parameters {
     return this.constructor.flatten(this);
   }
 
+  set flattened(v) {
+    this.clear();
+
+    v.forEach(parameter => {
+      this.constructor.deepen(this, parameter.key, parameter.value);
+    });
+  }
+
   get string() {
     var parameters = [];
 
@@ -44,16 +89,32 @@ class Parameters {
     return parameters.join('&');
   }
 
+  set string(v) {
+    this.flattened = v.split('&').map(parameter => {
+      parameter = parameter.split('=');
+      return {key: parameter[0], value: parameter[1]};
+    });
+  }
+
   get inputs() {
     var inputs = document.createDocumentFragment();
 
     this.flattened.forEach(parameter => {
       var input = document.createElement('input');
       var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
-      input.type = 'hidden';
       input.name = parameter.key;
-      input.setAttribute('value', value);
-      inputs.value = value;
+
+      if(typeof parameter.value === 'boolean') {
+        input.type = 'checkbox';
+        inputs.checked = value;
+      }
+      else {
+        if(typeof parameter.value === 'number') input.type = 'number';
+        else input.type = 'hidden';
+
+        input.setAttribute('value', value);
+        inputs.value = value;
+      }
 
       inputs.appendChild(input);
     });
@@ -63,8 +124,14 @@ class Parameters {
 
   set inputs(v) {
     if(v instanceof DocumentFragment) v = v.querySelector('input, textarea, select');
-    Array.prototype.forEach.call(v, input => {
+    this.flattened = Array.prototype.map.call(v, input => {
+      var value;
+      if(input.type === 'file') value = input.multiple ? input.files : input.files[0];
+      else if(input.type === 'checkbox') value = input.checked;
+      else if(input.type === 'number') value = parseFloat(input.value);
+      else value = input.value;
 
+      return {key: input.name, value: value};
     });
   }
 
@@ -73,10 +140,6 @@ class Parameters {
     this.flattened.forEach(parameter => formData.append(parameter.key, parameter.value));
 
     return formData;
-  }
-
-  set formData(v) {
-
   }
 
   get form() {
