@@ -1,4 +1,4 @@
-# Parameters JS 🎚
+# Parameters JS 🔑
 
 Simply manage url parameters.
 
