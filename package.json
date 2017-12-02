@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "doc": "jsdoc2md index.js --template README.hbs --partial partials/*.hbs > README.md",
-    "update-doc": "npm run doc;git add .;git commit -m 'Updated README.md';git push",
     "commit": "npm run doc;git add .;git commit;git push",
-    "release": "npm run doc;git add .;git commit;git push;npm publish"
+    "release": "npm run commit;npm publish"
   },
   "repository": {
     "type": "git",
