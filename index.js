@@ -369,3 +369,6 @@ class Parameters {
     return this;
   }
 }
+
+if(typeof module !== 'object' || module === null) module = {};
+module.exports = Parameters;
