@@ -282,6 +282,13 @@ Removes all the parameters.
 | key | <code>string</code> | The current key. |
 | value | <code>\*</code> | The current value. |
 
+## Classes
+
+<dl>
+<dt><a href="#Parameters">Parameters</a></dt>
+<dd></dd>
+</dl>
+
 ## Typedefs
 
 <dl>
