@@ -36,16 +36,6 @@ parameters.string;
 
 * [Parameters](#Parameters)
     * [new Parameters(...parameters)](#new_Parameters_new)
-    * [.keys](#Parameters+keys)
-    * [.flattened](#Parameters+flattened)
-    * [.string](#Parameters+string)
-    * [.inputs](#Parameters+inputs)
-    * [.formData](#Parameters+formData)
-    * [.form](#Parameters+form)
-    * [.json](#Parameters+json)
-    * [.clone](#Parameters+clone) ⇒ [<code>Parameters</code>](#Parameters)
-    * [.empty](#Parameters+empty)
-    * [.any](#Parameters+any)
     * [.toString()](#Parameters+toString) ⇒ <code>string</code>
     * [.set(...parameters)](#Parameters+set) ⇒ [<code>Parameters</code>](#Parameters)
     * [.unset(...keys)](#Parameters+unset) ⇒ [<code>Parameters</code>](#Parameters)
@@ -55,6 +45,7 @@ parameters.string;
     * [.map(callback)](#Parameters+map) ⇒ [<code>Parameters</code>](#Parameters)
     * [.reset()](#Parameters+reset) ⇒ [<code>Parameters</code>](#Parameters)
     * [.clear()](#Parameters+clear) ⇒ [<code>Parameters</code>](#Parameters)
+    * [.FlatParameter](#Parameters+FlatParameter) : <code>Object</code>
 
 <a name="new_Parameters_new"></a>
 
@@ -66,111 +57,11 @@ Create a [Parameters](#Parameters) object.
 | --- | --- | --- |
 | ...parameters | <code>Object</code> | Same value as [set](#Parameters+set)'s parameters. |
 
-<a name="Parameters+keys"></a>
-
-### parameters.keys
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Read only**: true  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| keys | <code>Array.&lt;string&gt;</code> | The parameters keys. |
-
-<a name="Parameters+flattened"></a>
-
-### parameters.flattened
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| flattened | [<code>Array.&lt;FlatParameter&gt;</code>](#FlatParameter) | A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters. |
-
-<a name="Parameters+string"></a>
-
-### parameters.string
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| string | <code>string</code> | A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters. |
-
-<a name="Parameters+inputs"></a>
-
-### parameters.inputs
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| inputs | <code>FragmentDocument</code> \| <code>NodeList</code> \| <code>Array</code> | A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters. |
-
-<a name="Parameters+formData"></a>
-
-### parameters.formData
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Read only**: true  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| formData | <code>FormData</code> | A FormData corresponding to the parameters. |
-
-<a name="Parameters+form"></a>
-
-### parameters.form
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| form | <code>HTMLFormElement</code> \| <code>Element</code> | A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters. |
-
-<a name="Parameters+json"></a>
-
-### parameters.json
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| json | <code>string</code> | A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters. |
-
-<a name="Parameters+clone"></a>
-
-### parameters.clone ⇒ [<code>Parameters</code>](#Parameters)
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Returns**: [<code>Parameters</code>](#Parameters) - clone A clone of the current parameters.  
-**Read only**: true  
-<a name="Parameters+empty"></a>
-
-### parameters.empty
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Read only**: true  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| empty | <code>boolean</code> | <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case. |
-
-<a name="Parameters+any"></a>
-
-### parameters.any
-**Kind**: instance property of [<code>Parameters</code>](#Parameters)  
-**Read only**: true  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| any | <code>boolean</code> | Opposite of [empty](#Parameters+empty) |
-
 <a name="Parameters+toString"></a>
 
 ### parameters.toString() ⇒ <code>string</code>
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
-**Returns**: <code>string</code> - Value of [string](#Parameters+string)  
+**Returns**: <code>string</code> - Value of [Parameters#string](Parameters#string)  
 <a name="Parameters+set"></a>
 
 ### parameters.set(...parameters) ⇒ [<code>Parameters</code>](#Parameters)
@@ -259,10 +150,10 @@ Removes all the parameters.
 
 **Kind**: instance method of [<code>Parameters</code>](#Parameters)  
 **Returns**: [<code>Parameters</code>](#Parameters) - Itself  
-<a name="FlatParameter"></a>
+<a name="Parameters+FlatParameter"></a>
 
-## FlatParameter : <code>Object</code>
-**Kind**: global typedef  
+### parameters.FlatParameter : <code>Object</code>
+**Kind**: instance typedef of [<code>Parameters</code>](#Parameters)  
 **Properties**
 
 | Name | Type | Description |
@@ -308,8 +199,6 @@ Removes all the parameters.
 ## Typedefs
 
 <dl>
-<dt><a href="#FlatParameter">FlatParameter</a> : <code>Object</code></dt>
-<dd></dd>
 <dt><a href="#indexCallback">indexCallback</a> : <code>function</code></dt>
 <dd></dd>
 <dt><a href="#haveCallback">haveCallback</a> : <code>function</code></dt>
