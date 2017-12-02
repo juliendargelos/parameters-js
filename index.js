@@ -1,3 +1,4 @@
+/** @class */
 class Parameters {
 
   /**
@@ -69,7 +70,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @readonly
    * @property {string[]}keys  The parameters keys.
    */
@@ -78,14 +78,12 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @typedef {Object} FlatParameter
    * @property {string} key The flattened key of the parameter.
    * @property {(string|number|boolean)?} value The value of the parameter
    */
 
   /**
-   * @memberof Parameters#
    * @property {FlatParameter[]} flattened A flat array corresponding to the parameters. When set, the given flattened parameters array will be parsed to replace the current parameters.
    */
   get flattened() {
@@ -101,7 +99,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @property {string} string A string corresponding to the parameters, ready to be used in a url.  When set, the given string will be parsed to replace the current parameters.
    */
   get string() {
@@ -122,7 +119,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @property {(FragmentDocument|NodeList|Array)} inputs A set of inputs corresponding the parameters.  When set, the given inputs will be parsed to replace the current parameters.
    */
   get inputs() {
@@ -165,7 +161,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @readonly
    * @property {FormData} formData A FormData corresponding to the parameters.
    */
@@ -177,7 +172,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @property {(HTMLFormElement|Element)} form A Form corresponding to the parameters. When set, the given form inputs be parsed to replace the current parameters.
    */
   get form() {
@@ -197,7 +191,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @property {string} json A json string corresponding to the parameters.  When set, the given json string will be parsed to replace the current parameters.
    */
   get json() {
@@ -214,7 +207,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @readonly
    * @returns {Parameters} clone A clone of the current parameters.
    */
@@ -223,7 +215,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @readonly
    * @property {boolean} empty <code>true</code> if no value different from <code>null</code> can be found in the parameters, <code>false</code> in the other case.
    */
@@ -237,7 +228,6 @@ class Parameters {
   }
 
   /**
-   * @memberof Parameters#
    * @readonly
    * @property {boolean} any Opposite of {@link Parameters#empty}
    */
