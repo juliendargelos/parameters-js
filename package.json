@@ -1,11 +1,11 @@
 {
   "name": "parameters-js",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Simply manage url parameters.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify index.js > dist/parameters.js",
+    "build": "node build.js",
     "doc": "jsdoc2md index.js --template README.hbs --partial partials/*.hbs > README.md",
     "commit": "npm run doc;git add .;git commit;git push",
     "release": "npm run commit;npm publish"
