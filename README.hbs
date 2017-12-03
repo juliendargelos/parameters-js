@@ -11,6 +11,8 @@ npm install parameters-js
 ## Usage
 
 ```javascript
+var Parameters = require('parameters-js');
+
 var parameters = new Parameters();
 
 parameters.post = 2;
