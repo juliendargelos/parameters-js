@@ -114,7 +114,7 @@ class Parameters {
   }
 
   set string(v) {
-    this.flattened = v.split('&').map(parameter => {
+    this.flattened = (v + '').split('&').map(parameter => {
       parameter = parameter.split('=');
       return {key: parameter[0], value: parameter[1]};
     });
