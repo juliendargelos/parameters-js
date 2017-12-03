@@ -1,6 +1,6 @@
 {
   "name": "parameters-js",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Simply manage url parameters.",
   "main": "index.js",
   "scripts": {

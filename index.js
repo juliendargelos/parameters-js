@@ -370,5 +370,4 @@ class Parameters {
   }
 }
 
-if(typeof module !== 'object' || module === null) module = {};
-module.exports = Parameters;
+if('module' in this)  module.exports = Parameters;
