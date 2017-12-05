@@ -37,20 +37,27 @@ module.exports = class Parameters {
 
     if(key === '') return;
 
-    if(after === '') object[key] = value;
-    else if(after === '[]') {
+    if(after === '') {
+      object[key] = value;
+      return object;
+    }
+
+    if(after === '[]') {
       if(!object[key]) object[key] = [];
       object[key].push(value);
-    }
-    else {
-      match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
 
-      if(match) this.deepenChild(object, key, value, match[1]);
-      else {
-        if(!object[key]) object[key] = new object.constructor();
-        object[key] = this.deepen(object[key], after, value);
-      }
+      return object;
     }
+
+    match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
+
+    if(match) {
+      this.deepenChild(object, key, value, match[1]);
+      return object;
+    }
+
+    if(!object[key]) object[key] = new object.constructor();
+    object[key] = this.deepen(object[key], after, value);
 
     return object;
   }
@@ -88,6 +95,29 @@ module.exports = class Parameters {
     input.value = value;
 
     return input;
+  }
+
+  static parameter(input) {
+    var value;
+
+    switch(input.type) {
+      case 'file':
+        value = input.multiple ? input.files : input.files[0];
+        break;
+
+      case 'checkbox':
+        value = input.checked;
+        break;
+
+      case 'number':
+        value = parseFloat(input.value);
+        break;
+
+      default:
+        value = input.value;
+    }
+
+    return {key: input.name, value: value};
   }
 
   /**
@@ -155,15 +185,7 @@ module.exports = class Parameters {
 
   set inputs(v) {
     if(v instanceof DocumentFragment) v = v.querySelector('input, textarea, select');
-    this.flattened = Array.prototype.map.call(v, input => {
-      var value;
-      if(input.type === 'file') value = input.multiple ? input.files : input.files[0];
-      else if(input.type === 'checkbox') value = input.checked;
-      else if(input.type === 'number') value = parseFloat(input.value);
-      else value = input.value;
-
-      return {key: input.name, value: value};
-    });
+    this.flattened = Array.prototype.map.call(v, input => this.parameter(input));
   }
 
   /**
