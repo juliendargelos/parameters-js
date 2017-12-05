@@ -12,10 +12,14 @@ module.exports = class Parameters {
     if(!current) current = '';
     if(!flattened) flattened = [];
 
-    if(['boolean', 'number', 'string'].includes(typeof object) || object === null) {
-      flattened.push({key: current, value: object});
-    }
-    else if(Array.isArray(object)) {
+    if(['boolean', 'number', 'string'].includes(typeof object) || object === null) flattened.push({key: current, value: object});
+    else this.flattendChild(object, current, flattened);
+
+    return flattened;
+  }
+
+  static flattenChild(object, current, flattened) {
+    if(Array.isArray(object)) {
       object.forEach(value => this.flatten(value, this.key(current, ''), flattened));
     }
     else if(typeof object === 'object') {
@@ -23,8 +27,6 @@ module.exports = class Parameters {
         if(object.hasOwnProperty(key)) this.flatten(object[key], this.key(current, key), flattened);
       }
     }
-
-    return flattened;
   }
 
   static deepen(object, key, value) {
@@ -43,18 +45,7 @@ module.exports = class Parameters {
     else {
       match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
 
-      if(match) {
-        var childKey = match[1];
-        if(!object[key]) object[key] = [];
-
-        var last = object[key].length - 1;
-        if(last < 0) last = 0;
-
-        if(typeof object[key][last] === 'object' && object[key][last] !== null && !Object.keys(object[key][last]).includes(childKey)) {
-          this.deepen(object[key][last], childKey, value);
-        }
-        else object[key].push(this.deepen(new object.constructor(), childKey, value));
-      }
+      if(match) this.deepenChild(object, key, value, match[1]);
       else {
         if(!object[key]) object[key] = new object.constructor();
         object[key] = this.deepen(object[key], after, value);
@@ -64,8 +55,39 @@ module.exports = class Parameters {
     return object;
   }
 
+  static deepenChild(object, key, value, childKey) {
+    if(!object[key]) object[key] = [];
+
+    var last = object[key].length - 1;
+    if(last < 0) last = 0;
+
+    if(typeof object[key][last] === 'object' && object[key][last] !== null && !Object.keys(object[key][last]).includes(childKey)) {
+      this.deepen(object[key][last], childKey, value);
+    }
+    else object[key].push(this.deepen(new object.constructor(), childKey, value));
+  }
+
   static key(current, key) {
     return current ? current + '[' + key + ']' : key;
+  }
+
+  static input(key, value) {
+    var input = document.createElement('input');
+    var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
+    input.name = parameter.key;
+
+    if(typeof value === 'boolean') {
+      input.type = 'checkbox';
+      input.checked = value;
+
+      return input;
+    }
+
+    input.type = typeof value === 'number' ? 'number' : 'hidden';
+    input.setAttribute('value', value);
+    input.value = value;
+
+    return input;
   }
 
   /**
@@ -126,26 +148,7 @@ module.exports = class Parameters {
    */
   get inputs() {
     var inputs = document.createDocumentFragment();
-
-    this.flattened.forEach(parameter => {
-      var input = document.createElement('input');
-      var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
-      input.name = parameter.key;
-
-      if(typeof parameter.value === 'boolean') {
-        input.type = 'checkbox';
-        inputs.checked = value;
-      }
-      else {
-        if(typeof parameter.value === 'number') input.type = 'number';
-        else input.type = 'hidden';
-
-        input.setAttribute('value', value);
-        inputs.value = value;
-      }
-
-      inputs.appendChild(input);
-    });
+    this.flattened.forEach(parameter => inputs.appendChild(this.constructor.input(parameter.key, parameter.value)));
 
     return inputs;
   }
