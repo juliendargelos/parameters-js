@@ -12,10 +12,14 @@ class Parameters {
     if(!current) current = '';
     if(!flattened) flattened = [];
 
-    if(['boolean', 'number', 'string'].includes(typeof object) || object === null) {
-      flattened.push({key: current, value: object});
-    }
-    else if(Array.isArray(object)) {
+    if(['boolean', 'number', 'string'].includes(typeof object) || object === null) flattened.push({key: current, value: object});
+    else this.flattendChild(object, current, flattened);
+
+    return flattened;
+  }
+
+  static flattenChild(object, current, flattened) {
+    if(Array.isArray(object)) {
       object.forEach(value => this.flatten(value, this.key(current, ''), flattened));
     }
     else if(typeof object === 'object') {
@@ -23,8 +27,6 @@ class Parameters {
         if(object.hasOwnProperty(key)) this.flatten(object[key], this.key(current, key), flattened);
       }
     }
-
-    return flattened;
   }
 
   static deepen(object, key, value) {
@@ -35,37 +37,87 @@ class Parameters {
 
     if(key === '') return;
 
-    if(after === '') object[key] = value;
-    else if(after === '[]') {
+    if(after === '') {
+      object[key] = value;
+      return object;
+    }
+
+    if(after === '[]') {
       if(!object[key]) object[key] = [];
       object[key].push(value);
+
+      return object;
     }
-    else {
-      match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
 
-      if(match) {
-        var childKey = match[1];
-        if(!object[key]) object[key] = [];
+    match = [after.match(/^\[\]\[([^\[\]]+)\]$/), after.match(/^\[\](.+)$/)].find(match => !!match);
 
-        var last = object[key].length - 1;
-        if(last < 0) last = 0;
-
-        if(typeof object[key][last] === 'object' && object[key][last] !== null && !Object.keys(object[key][last]).includes(childKey)) {
-          this.deepen(object[key][last], childKey, value);
-        }
-        else object[key].push(this.deepen(new object.constructor(), childKey, value));
-      }
-      else {
-        if(!object[key]) object[key] = new object.constructor();
-        object[key] = this.deepen(object[key], after, value);
-      }
+    if(match) {
+      this.deepenChild(object, key, value, match[1]);
+      return object;
     }
+
+    if(!object[key]) object[key] = new object.constructor();
+    object[key] = this.deepen(object[key], after, value);
 
     return object;
   }
 
+  static deepenChild(object, key, value, childKey) {
+    if(!object[key]) object[key] = [];
+
+    var last = object[key].length - 1;
+    if(last < 0) last = 0;
+
+    if(typeof object[key][last] === 'object' && object[key][last] !== null && !Object.keys(object[key][last]).includes(childKey)) {
+      this.deepen(object[key][last], childKey, value);
+    }
+    else object[key].push(this.deepen(new object.constructor(), childKey, value));
+  }
+
   static key(current, key) {
     return current ? current + '[' + key + ']' : key;
+  }
+
+  static input(key, value) {
+    var input = document.createElement('input');
+    var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
+    input.name = parameter.key;
+
+    if(typeof value === 'boolean') {
+      input.type = 'checkbox';
+      input.checked = value;
+
+      return input;
+    }
+
+    input.type = typeof value === 'number' ? 'number' : 'hidden';
+    input.setAttribute('value', value);
+    input.value = value;
+
+    return input;
+  }
+
+  static parameter(input) {
+    var value;
+
+    switch(input.type) {
+      case 'file':
+        value = input.multiple ? input.files : input.files[0];
+        break;
+
+      case 'checkbox':
+        value = input.checked;
+        break;
+
+      case 'number':
+        value = parseFloat(input.value);
+        break;
+
+      default:
+        value = input.value;
+    }
+
+    return {key: input.name, value: value};
   }
 
   /**
@@ -126,41 +178,14 @@ class Parameters {
    */
   get inputs() {
     var inputs = document.createDocumentFragment();
-
-    this.flattened.forEach(parameter => {
-      var input = document.createElement('input');
-      var value = [null, undefined].includes(parameter.value) ? '' : parameter.value;
-      input.name = parameter.key;
-
-      if(typeof parameter.value === 'boolean') {
-        input.type = 'checkbox';
-        inputs.checked = value;
-      }
-      else {
-        if(typeof parameter.value === 'number') input.type = 'number';
-        else input.type = 'hidden';
-
-        input.setAttribute('value', value);
-        inputs.value = value;
-      }
-
-      inputs.appendChild(input);
-    });
+    this.flattened.forEach(parameter => inputs.appendChild(this.constructor.input(parameter.key, parameter.value)));
 
     return inputs;
   }
 
   set inputs(v) {
     if(v instanceof DocumentFragment) v = v.querySelector('input, textarea, select');
-    this.flattened = Array.prototype.map.call(v, input => {
-      var value;
-      if(input.type === 'file') value = input.multiple ? input.files : input.files[0];
-      else if(input.type === 'checkbox') value = input.checked;
-      else if(input.type === 'number') value = parseFloat(input.value);
-      else value = input.value;
-
-      return {key: input.name, value: value};
-    });
+    this.flattened = Array.prototype.map.call(v, input => this.parameter(input));
   }
 
   /**
