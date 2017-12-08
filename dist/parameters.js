@@ -13,7 +13,7 @@ class Parameters {
     if(!flattened) flattened = [];
 
     if(['boolean', 'number', 'string'].includes(typeof object) || object === null) flattened.push({key: current, value: object});
-    else this.flattendChild(object, current, flattened);
+    else this.flattenChild(object, current, flattened);
 
     return flattened;
   }
