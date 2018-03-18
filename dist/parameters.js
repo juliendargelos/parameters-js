@@ -214,8 +214,9 @@ class Parameters {
 
   set form(v) {
     try {
-      this.inputs = v.querySelector('input, textarea, select');
-      if(v.id) this.inputs = this.inputs.concat(Array.prototype.slice.call(document.querySelector('input[form="' + v.id + '"], textarea[form="' + v.id + '"], select[form="' + v.id + '"]')))
+      var inputs = Array.prototype.slice.call(v.querySelectorAll('input, textarea, select'));
+      if(v.id) inputs = inputs.concat(Array.prototype.slice.call(document.querySelectorAll('input[form="' + v.id + '"], textarea[form="' + v.id + '"], select[form="' + v.id + '"]')));
+      this.inputs = inputs;
     }
     catch(e) {
       throw e;
