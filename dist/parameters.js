@@ -186,7 +186,7 @@ class Parameters {
   set inputs(v) {
     if(v instanceof DocumentFragment) v = v.querySelector('input, textarea, select');
     if(v === null || v === undefined) this.flattened = []
-    else this.flattened = Array.prototype.map.call(v, input => this.parameter(input));
+    else this.flattened = Array.prototype.map.call(v, input => this.constructor.parameter(input));
   }
 
   /**
