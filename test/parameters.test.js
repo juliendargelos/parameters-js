@@ -6,6 +6,20 @@ test('Parameters is instanceable', () => {
   expect(parameters).toBeInstanceOf(Parameters)
 })
 
+test('"parameter" creates the right parameters objects from input', () => {
+  const file = {name: 'file-input', type: 'file', files: ['File']}
+  const checkbox = {name: 'checkbox-input', type: 'checkbox', checked: true}
+  const number = {name: 'number-input', type: 'number', value: '2.5'}
+  const text = {name: 'text-input', type: 'text', value: 'Lorem'}
+
+  expect(Parameters.parameter(file)).toEqual({key: 'file-input', value: 'File'})
+  expect(Parameters.parameter(checkbox)).toEqual({key: 'checkbox-input', value: true})
+  expect(Parameters.parameter(number)).toEqual({key: 'number-input', value: 2.5})
+  expect(Parameters.parameter(text)).toEqual({key: 'text-input', value: 'Lorem'})
+})
+
+
+
 test('Objects are transformed into parameters string', () => {
   const parameters = new Parameters({
     user: {
@@ -250,6 +264,22 @@ test('"any" returns true if parameters aren\'t empty and false in the other case
   expect(falseParameters.any).toBe(true)
   expect(stringParameters.any).toBe(true)
   expect(blankArrayParameters.any).toBe(true)
+})
+
+test('"toString" is identical to "string"', () => {
+  const parameters = new Parameters({
+    user: {
+      first_name: 'Jane',
+      last_name: 'Doe',
+      tags: ['Lorem', 'Ipsum', 'Dolor', 'Sit', 'Amet'],
+      preferences: {
+        notifications: 'false',
+        language: 'en'
+      }
+    }
+  })
+
+  expect(parameters.toString()).toBe(parameters.string)
 })
 
 test('"set" properly sets parameters', () => {
