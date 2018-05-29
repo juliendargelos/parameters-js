@@ -336,7 +336,7 @@ module.exports = class Parameters {
    * @returns {boolean} <code>true</code> if the key exists, false in the other case.
    */
   have(key, callback) {
-    return this.keys.includes(key) && (callback.call(this) || true);
+    return this.keys.includes(key) && ((typeof callback === 'function' && callback.call(this)) || true);
   }
 
   /**
