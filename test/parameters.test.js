@@ -47,13 +47,16 @@ test('"flatten" properly flattens objects', () => {
 })
 
 test('"deepen" properly deepens objects', () => {
-  const key = 'lorem[ipsum]'
-  const value = 'dolor'
-  var object = {}
+  const keyWithoutArray = 'lorem[ipsum]'
+  const keyWithArray = 'lorem[ipsum][][dolor]'
+  var objectWithoutArray = {}
+  var objectWithArray = {}
 
-  Parameters.deepen(object, key, value)
+  Parameters.deepen(objectWithoutArray, keyWithoutArray, 'dolor')
+  Parameters.deepen(objectWithArray, keyWithArray, 'sit')
 
-  expect(object).toEqual({lorem: {ipsum: 'dolor'}})
+  expect(objectWithoutArray).toEqual({lorem: {ipsum: 'dolor'}})
+  expect(objectWithArray).toEqual({lorem: {ipsum: [{dolor: 'sit'}]}})
 })
 
 test('Objects are transformed into parameters string', () => {
@@ -325,7 +328,8 @@ test('"toString" is identical to "string"', () => {
 })
 
 test('"set" properly sets parameters', () => {
-  const parameters = new Parameters()
+  const parametersFromObject = new Parameters()
+  const parametersFromString = new Parameters()
 
   const object = {
     user: {
@@ -339,9 +343,13 @@ test('"set" properly sets parameters', () => {
     }
   }
 
-  parameters.set(object)
+  const string = 'key'
 
-  expect(parameters).toEqual(object)
+  parametersFromObject.set(object)
+  parametersFromString.set(string)
+
+  expect(parametersFromObject).toEqual(object)
+  expect(parametersFromString).toEqual({[string]: null})
 })
 
 test('"unset" removes the given keys', () => {
