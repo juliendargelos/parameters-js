@@ -18,7 +18,7 @@ test('"parameter" creates the right parameters objects from input', () => {
   expect(Parameters.parameter(text)).toEqual({key: 'text-input', value: 'Lorem'})
 })
 
-test('"flatten" properly flatten objects', () => {
+test('"flatten" properly flattens objects', () => {
   const object = {
     user: {
       first_name: 'Jane',
@@ -44,6 +44,16 @@ test('"flatten" properly flatten objects', () => {
   ]
 
   expect(Parameters.flatten(object)).toEqual(flattened)
+})
+
+test('"deepen" properly deepens objects', () => {
+  const key = 'lorem[ipsum]'
+  const value = 'dolor'
+  var object = {}
+
+  Parameters.deepen(object, key, value)
+
+  expect(object).toEqual({lorem: {ipsum: 'dolor'}})
 })
 
 test('Objects are transformed into parameters string', () => {
