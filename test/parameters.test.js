@@ -18,7 +18,33 @@ test('"parameter" creates the right parameters objects from input', () => {
   expect(Parameters.parameter(text)).toEqual({key: 'text-input', value: 'Lorem'})
 })
 
+test('"flatten" properly flatten objects', () => {
+  const object = {
+    user: {
+      first_name: 'Jane',
+      last_name: 'Doe',
+      tags: ['Lorem', 'Ipsum', 'Dolor', 'Sit', 'Amet'],
+      preferences: {
+        notifications: 'false',
+        language: 'en'
+      }
+    }
+  }
 
+  const flattened = [
+    {key: 'user[first_name]', value: 'Jane'},
+    {key: 'user[last_name]', value: 'Doe'},
+    {key: 'user[tags][]', value: 'Lorem'},
+    {key: 'user[tags][]', value: 'Ipsum'},
+    {key: 'user[tags][]', value: 'Dolor'},
+    {key: 'user[tags][]', value: 'Sit'},
+    {key: 'user[tags][]', value: 'Amet'},
+    {key: 'user[preferences][notifications]', value: 'false'},
+    {key: 'user[preferences][language]', value: 'en'}
+  ]
+
+  expect(Parameters.flatten(object)).toEqual(flattened)
+})
 
 test('Objects are transformed into parameters string', () => {
   const parameters = new Parameters({
@@ -215,6 +241,12 @@ test('Objects are converted into JSON strings', () => {
   )
 
   expect(parameters.json).toEqual(json)
+})
+
+test('An exception is thrown when invalid JSON is provided', () => {
+  const parameters = new Parameters()
+
+  expect(() => parameters.json = '{').toThrow()
 })
 
 test('"clone" is a equal and different Parameters instance', () => {
