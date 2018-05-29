@@ -352,9 +352,11 @@ module.exports = class Parameters {
    * @returns {Parameters} Itself.
    */
   each(callback) {
-    this.keys.forEach(key => {
-      if(callback.call(this, key, this[key]) === false) return false;
-    });
+    var keys = this.keys
+
+    for(var i = 0; i < keys.length; i++) {
+      if(callback.call(this, keys[i], this[keys[i]]) === false) break;
+    }
 
     return this;
   }
