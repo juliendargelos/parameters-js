@@ -361,8 +361,8 @@ test('"index" returns the index of the given key and null if it doesn\'t exist',
 
 test('"have" returns true and call the callback if the given key exists and returns false and doesn\'t call the callback in the other case', () => {
   const parameters = new Parameters({key: ''})
-  const callbackToBeCalled = jest.fn();
-  const callbackNotToBeCalled = jest.fn();
+  const callbackToBeCalled = jest.fn()
+  const callbackNotToBeCalled = jest.fn()
   parameters.have('key', callbackToBeCalled)
   parameters.have('foo', callbackNotToBeCalled)
 
@@ -372,14 +372,18 @@ test('"have" returns true and call the callback if the given key exists and retu
   expect(callbackNotToBeCalled).not.toBeCalled()
 })
 
-test('"each" iterates through all parameters', () => {
+test('"each" iterates through all parameters and breaks if the callback return false', () => {
   const parameters = new Parameters({lorem: 'ipsum', dolor: 'sit'})
-  const callback = jest.fn();
+  const callback = jest.fn()
+  const breakingCallback = jest.fn(() => { return false })
 
   parameters.each(callback)
+  parameters.each(breakingCallback)
 
+  expect(callback).toBeCalledTimes(2)
   expect(callback).toHaveBeenNthCalledWith(1, 'lorem', 'ipsum')
   expect(callback).toHaveBeenNthCalledWith(2, 'dolor', 'sit')
+  expect(breakingCallback).toBeCalledTimes(1)
 })
 
 test('"map" replace parameters values with the yielded values', () => {
