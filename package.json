@@ -4,11 +4,11 @@
   "description": "Simply manage url parameters.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js",
-    "doc": "npm run build;jsdoc2md dist/parameters.js --template README.hbs --partial partials/*.hbs > README.md",
-    "commit": "npm run doc;git add .;git commit;git push",
-    "release": "npm run commit;npm publish"
+    "test": "jest",
+    "build": "npm run test && node build.js",
+    "doc": "npm run build && jsdoc2md dist/parameters.js --template README.hbs --partial partials/*.hbs > README.md",
+    "commit": "npm run doc && git add . && git commit;git push",
+    "release": "npm run commit && npm publish"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "author": "Julien Dargelos",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^23.0.1",
     "jsdoc-to-markdown": "^3.0.2"
   }
 }
