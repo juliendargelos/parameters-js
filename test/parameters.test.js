@@ -394,7 +394,7 @@ test('"each" iterates through all parameters and breaks if the callback return f
   expect(breakingCallback).toBeCalledTimes(1)
 })
 
-test('"map" replace parameters values with the yielded values', () => {
+test('"map" replaces parameters values with the yielded values', () => {
   const parameters = new Parameters({lorem: 'ipsum', dolor: 'sit'})
 
   parameters.map((key, value) => `replaced ${value}`)
@@ -402,7 +402,7 @@ test('"map" replace parameters values with the yielded values', () => {
   expect(parameters).toEqual({lorem: 'replaced ipsum', dolor: 'replaced sit'})
 })
 
-test('"reset" set all parameters values to null', () => {
+test('"reset" sets all parameters values to null', () => {
   const parameters = new Parameters({lorem: 'ipsum', dolor: 'sit'})
   parameters.reset()
 
@@ -410,7 +410,7 @@ test('"reset" set all parameters values to null', () => {
   expect(parameters.dolor).toBe(null)
 })
 
-test('"clear" remove all parameters', () => {
+test('"clear" removes all parameters', () => {
   const parameters = new Parameters({lorem: 'ipsum', dolor: 'sit'})
   parameters.clear()
 
