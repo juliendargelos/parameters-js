@@ -1,6 +1,7 @@
 # Parameters JS 🔑
 [![npm version](https://badge.fury.io/js/parameters-js.svg)](https://badge.fury.io/js/parameters-js)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ef4ed91e5826a0767fae/maintainability)](https://codeclimate.com/github/juliendargelos/parameters-js/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ef4ed91e5826a0767fae/test_coverage)](https://codeclimate.com/github/juliendargelos/parameters-js/test_coverage)
 
 Simply manage url parameters.
 
